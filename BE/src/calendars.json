@@ -1,0 +1,6 @@
+{
+  "calendars":[
+    { "id": 1, "state": "MA", "return": "MA ST-7", "filingType": "Paper", "legalEntity":"Filing Test", "filingFrequency": 1},
+    { "id": 2, "state": "RI", "return": "RI ST-7", "filingType": "Paper", "legalEntity":"Filing Test", "filingFrequency": 2}
+  ]
+}

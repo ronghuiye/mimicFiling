@@ -1,0 +1,4 @@
+export const actionTypes = {
+  FETCH_CALENDAR_LIST : 'FETCH_CALENDAR_LIST',
+  SET_CALENDAR_LIST: 'SET_CALENDAR_LIST'
+}
