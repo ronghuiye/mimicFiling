@@ -9,6 +9,11 @@ const managerCalendarReducer = (state = init_state, action) =>
         ...state,
         calendarList: action.data
       }
+    case actionTypes.SET_PAGE_STATE:
+      return {
+        ...state,
+        pageState: action.pageState
+      }
     default: return state
   }
 }

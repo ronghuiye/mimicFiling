@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from "react"
-import { DataGrid } from '@material-ui/data-grid';
-import Drawer from '@material-ui/core/Drawer';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import ReturnListView from './ReturnListView'
 
 const STYLES = {
   formControl: {
@@ -15,40 +14,51 @@ const STYLES = {
   }
 }
 
-const columns = [
-  { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'state', headerName: 'State', width: 130 },
-  { field: 'return', headerName: 'Return', width: 130 },
-  { field: 'filingType', headerName: 'Filing Type', width: 130 },
-  { field: 'legalEntity', headerName: 'Legal Entity', width: 130 },
-  { field: 'amount', headerName: 'Amount', width: 130 },
+const headCells = [
+  { id: 'id', numeric: false, disablePadding: true, label: 'ID' },
+  { id: 'state', numeric: false, disablePadding: false, label: 'STATE' },
+  { id: 'return', numeric: false, disablePadding: false, label: 'RETURN' },
+  { id: 'filingType', numeric: false, disablePadding: false, label: 'FILING TYPE' },
+  { id: 'legalEntity', numeric: false, disablePadding: false, label: 'LEGAL ENTITY' },
+  { id: 'amount', numeric: true, disablePadding: false, label: 'AMOUNT' },
 ];
+
+const yearItems = [{label:'2019', value:2019},{label:'2020', value:2020},{label:'2021', value:2021}]
+const monthItems = [
+  {label:'Jan', value:1},
+  {label:'Feb', value:2},
+  {label:'Mar', value:3},
+  {label:'Apr', value:4},
+  {label:'May', value:5},
+  {label:'Jun', value:6},
+  {label:'Jul', value:7},
+  {label:'Aug', value:8},
+  {label:'Sep', value:9},
+  {label:'Oct', value:10},
+  {label:'Nov', value:11},
+  {label:'Dec', value:12}
+  ]
 
 function ReturnList(props) {
 
-  const [isOpen, setOpen] = useState(false)
+  const {fetchReturnList, year, month, setYear, setMonth, returnList, selected, setSelected} = props
 
   useEffect(() => {
-    props.fetchReturnList(props.year,props.month)
-  }, [props.year,props.month])
+    fetchReturnList(year,month)
+  }, [year,month])
 
-  const handleOnRowClick = rowParams => {
-    setOpen(true)
+  const handleOnChange = event => {
+    const {value, name} = event.target
+    if(name === 'year')
+      setYear(value)
+    else
+      setMonth(value)
+    setSelected([])
   }
 
-  const handleOnClose = event => {
-    setOpen(false)
-  }
+  const renderYearItems = () => yearItems.map(i => <MenuItem value={i.value}>{i.label}</MenuItem>)
 
-  const handleYearOnChange = event => {
-    let value = event.target.value
-    props.setYear(value)
-  }
-
-  const handleMonthOnChange = event => {
-    let value = event.target.value
-    props.setMonth(value)
-  }
+  const renderMonthItems = () => monthItems.map(i => <MenuItem value={i.value}>{i.label}</MenuItem>)
 
   return (
     <div style={{ height: 600}}>
@@ -57,40 +67,26 @@ function ReturnList(props) {
           <Select
             labelId="year-label"
             id="year"
-            value={props.year}
-            onChange={handleYearOnChange}
+            name="year"
+            value={year}
+            onChange={handleOnChange}
           >
-            <MenuItem value={2019}>2019</MenuItem>
-            <MenuItem value={2020}>2020</MenuItem>
-            <MenuItem value={2021}>2021</MenuItem>
+            {renderYearItems()}
           </Select>
         </FormControl>
         <FormControl style={STYLES.formControl}>
           <Select
             labelId="month-label"
             id="month"
-            value={props.month}
-            onChange={handleMonthOnChange}
+            name="month"
+            value={month}
+            onChange={handleOnChange}
           >
-            <MenuItem value={1}>Jan</MenuItem>
-            <MenuItem value={2}>Feb</MenuItem>
-            <MenuItem value={3}>Mar</MenuItem>
-            <MenuItem value={4}>Apr</MenuItem>
-            <MenuItem value={5}>May</MenuItem>
-            <MenuItem value={6}>Jun</MenuItem>
-            <MenuItem value={7}>Jul</MenuItem>
-            <MenuItem value={8}>Aug</MenuItem>
-            <MenuItem value={9}>Sep</MenuItem>
-            <MenuItem value={10}>Oct</MenuItem>
-            <MenuItem value={11}>Nov</MenuItem>
-            <MenuItem value={12}>Dec</MenuItem>
+            {renderMonthItems()}
           </Select>
         </FormControl>
       </span>
-      <DataGrid rows={props.returnList} columns={columns} pageSize={10} onRowClick={handleOnRowClick} />
-      <Drawer open={isOpen} anchor='right' onClose={handleOnClose}>
-        <div>form by state</div>
-      </Drawer>
+      <ReturnListView rows={returnList} headCells={headCells} selected={selected} setSelected={setSelected} />
     </div>
   )
 

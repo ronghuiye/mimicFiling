@@ -9,13 +9,11 @@ import { createBrowserHistory } from 'history'
 import {Router} from 'react-router-dom'
 
 ReactDOM.render(
-  <React.StrictMode>
     <Provider store={store}>
       <Router history={createBrowserHistory()}>
         <App/>
       </Router>
     </Provider>
-  </React.StrictMode>
 ,
 document.getElementById('root')
 );

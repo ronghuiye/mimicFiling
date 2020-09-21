@@ -1,15 +1,15 @@
 import React, {useState, useEffect} from "react"
-import { DataGrid } from '@material-ui/data-grid';
-import Button from '@material-ui/core/Button';
 import AddCalendar from "./AddCalendar";
+import ListView from "./CalendarListView";
 
-const columns = [
-  { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'state', headerName: 'State', width: 100 },
-  { field: 'return', headerName: 'Return', width: 100 },
-  { field: 'filingType', headerName: 'Filing Type', width: 130 },
-  { field: 'legalEntity', headerName: 'Legal Entity', width: 130 },
-  { field: 'filingFrequency', headerName: 'Filing Frequency', width: 160, valueFormatter: ({ value }) => value === 1 ? 'Monthly' : 'Quarterly'},
+
+const headCells = [
+  { id: 'id', numeric: false, disablePadding: true, label: 'ID' },
+  { id: 'state', numeric: false, disablePadding: false, label: 'STATE' },
+  { id: 'return', numeric: false, disablePadding: false, label: 'RETURN' },
+  { id: 'filingType', numeric: false, disablePadding: false, label: 'FILING TYPE' },
+  { id: 'legalEntity', numeric: false, disablePadding: false, label: 'LEGAL ENTITY' },
+  { id: 'filingFrequency', numeric: false, disablePadding: false, label: 'FILING FREQUENCY' },
 ];
 
 function CalendarList(props) {
@@ -17,9 +17,8 @@ function CalendarList(props) {
   const [isOpen, setOpen] = useState(false)
 
   useEffect(() => {
-    props.fetchCalendarList()
-  },[])
-
+    props.fetchCalendarList(props.pageState)
+  },[props.pageState.order, props.pageState.rowsPerPage, props.pageState.orderBy, props.pageState.page])
 
   const handleOnClick = () => {
     setOpen(true)
@@ -31,10 +30,7 @@ function CalendarList(props) {
 
   return (
     <div style={{ height: 600, width: 'auto' }}>
-      <div style={{ display:'flex', flexDirection: 'row-reverse'}}>
-          <Button variant="contained" onClick={handleOnClick} >ADD</Button>
-      </div>
-      <DataGrid rows={props.calendarList} columns={columns} pageSize={10} />
+      <ListView rows={props.calendarList} headCells={headCells} pageState={props.pageState} setPageState={props.setPageState} addOnClick={handleOnClick} deleteOnClick={props.deleteCalendar} />
       <AddCalendar open={isOpen} onClose={handleOnClose} createCalendar={props.createCalendar} />
     </div>
   )

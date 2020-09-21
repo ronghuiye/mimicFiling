@@ -2,7 +2,7 @@ import axios from 'axios'
 
 class ManagerCalendarAPI {
 
-  static fetchCalendarList() {
+  static fetchCalendarList(pageState) {
     const axiosInstance = axios.create()
     return axiosInstance({
       method: 'get',
@@ -10,6 +10,12 @@ class ManagerCalendarAPI {
       headers: {
         'Cache-Control': 'no-cache',
         'Content-Type': 'application/json'
+      },
+      params: {
+        'page': pageState.page,
+        'rowsPerPage': pageState.rowsPerPage,
+        'orderBy': pageState.orderBy,
+        'order': pageState.order
       }
     })
       .then(response => response.data)
@@ -26,6 +32,24 @@ class ManagerCalendarAPI {
         'Content-Type': 'application/json'
       },
       data:body
+    })
+      .then(response => response.data)
+      .catch(error => console.log(error))
+  }
+
+
+  static deleteCalendar(ids) {
+    const axiosInstance = axios.create()
+    return axiosInstance({
+      method: 'delete',
+      url: '/api/v1/calendars',
+      headers: {
+        'Cache-Control': 'no-cache',
+        'Content-Type': 'application/json'
+      },
+      data:{
+        'ids': ids
+      }
     })
       .then(response => response.data)
       .catch(error => console.log(error))

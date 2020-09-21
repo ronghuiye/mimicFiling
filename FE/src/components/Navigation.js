@@ -32,10 +32,10 @@ const Navigation = ({links}) => {
   const renderIcon = icon => {
     return React.createElement(icon)
   }
-  const renderLinkItem = link => {
+  const renderLinkItem = (link, index) => {
     return (
-      <>
       <ListItem
+        key={`link-item-${index}`}
         component="li"
         button
         style={{paddingTop:'20px',paddingBottom:'20px', color: 'white'}}
@@ -43,7 +43,6 @@ const Navigation = ({links}) => {
         onClick={() => link.action()}
       >{renderIcon(link.icon)}<span style={{paddingLeft:'20px'}}>{link.label}</span>
       </ListItem>
-      </>
     )
   }
 
@@ -52,7 +51,7 @@ const Navigation = ({links}) => {
       <div className={classes.root}>
         <div className={classes.content}>
           <div className={classes.links}>
-            {links.map(link => renderLinkItem(link))}
+            {links.map((link,index) => renderLinkItem(link, index))}
           </div>
         </div>
       </div>

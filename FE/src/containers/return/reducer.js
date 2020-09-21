@@ -19,6 +19,11 @@ const managerReturnReducer = (state = init_state, action) =>
         ...state,
         month: action.data
       }
+    case actionTypes.SET_SELECTED:
+      return {
+        ...state,
+        selected: action.data
+      }
     default: return state
   }
 }

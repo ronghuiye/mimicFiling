@@ -18,45 +18,33 @@ const STYLES = {
   }
 }
 
+const resetState = {
+  state:'',
+  return:'',
+  filingType:'',
+  legalEntity:'',
+  filingFrequency:''
+}
+
+const STATES = [{value:'MA',label:'MA'},{value:'CA',label:'CA'},{value:'NH',label:'NH'},{value:'FL',label:'FL'},{value:'NY',label:'NY'},{value:'RI',label:'RI'}]
+
 function AddCalendar(props) {
 
-  const [newCalendar, setNewCalendar] = useState({
-    state:'',
-    return:'',
-    filingType:'',
-    legalEntity:'',
-    filingFrequency:''
-  })
+  const [newCalendar, setNewCalendar] = useState(resetState)
 
-  const [error, setError] = useState({
-    state:'',
-    return:'',
-    filingType:'',
-    legalEntity:'',
-    filingFrequency:''
-  })
+  const [error, setError] = useState(resetState)
 
   const handleCreate = () => {
 
     props.onClose()
     props.createCalendar(newCalendar)
-    setNewCalendar({
-      state:'',
-      return:'',
-      filingType:'',
-      legalEntity:'',
-      filingFrequency:''
-    })
+    setNewCalendar(resetState)
   }
 
-  const handleOnChange = e => {console.log(e.target)
+  const handleOnChange = e => {
     let {id, value} = e.target
     let err = {...error}
     switch (id){
-      case "state":
-        err.state = value.length >= 2 ? '':'At least 2 characters long'
-        setNewCalendar({...newCalendar,state:value})
-        break;
       case "return":
         err.return = value.length >= 2 ? '':'At least 2 characters long'
         setNewCalendar({...newCalendar,return:value})
@@ -76,43 +64,42 @@ function AddCalendar(props) {
   }
 
   const handleSelect = e => {
-    setNewCalendar({...newCalendar,filingFrequency:e.target.value})
+    const {name, value} =e.target
+    if(name === 'filingFrequency')
+      setNewCalendar({...newCalendar,filingFrequency:value})
+    else
+      setNewCalendar({...newCalendar,state:value})
   }
 
   const handleOnClose = () => {
     props.onClose()
-    setNewCalendar({
-      state:'',
-      return:'',
-      filingType:'',
-      legalEntity:'',
-      filingFrequency:''
-    })
-    setError({
-      state:'',
-      return:'',
-      filingType:'',
-      legalEntity:'',
-      filingFrequency:''
-    })
+    setNewCalendar(resetState)
+    setError(resetState)
   }
 
   const isDisabled = () => {
     return error.state || error.return || error.filingType || error.legalEntity || error.filingFrequency || !newCalendar.state || !newCalendar.return || !newCalendar.filingType || !newCalendar.legalEntity || !newCalendar.filingFrequency
   }
 
+  const stateMenuItems = () => STATES.map(s =>  <MenuItem value={s.value}>{s.label}</MenuItem>)
+
   return (
     <div style={{ height: 600}}>
       <Drawer open={props.open} anchor='right' onClose={handleOnClose}>
         <div style={STYLES.div}>
-          <TextField
-            id="state"
-            label="State"
-            value={newCalendar.state}
-            onChange={handleOnChange}
-            helperText={error.state}
-            variant="filled"
-          />
+          <FormControl style={STYLES.formControl}>
+            <InputLabel id="state-label">State</InputLabel>
+            <Select
+              labelId="dselect-label"
+              id="state"
+              name="state"
+              value={newCalendar.state}
+              onChange={handleSelect}
+            >
+              {stateMenuItems()}
+            </Select>
+            <FormHelperText>{error.filingFrequency}</FormHelperText>
+          </FormControl>
         </div>
         <div style={STYLES.div}>
           <TextField
@@ -150,6 +137,7 @@ function AddCalendar(props) {
             <Select
               labelId="dselect-label"
               id="filingFrequency"
+              name="filingFrequency"
               value={newCalendar.filingFrequency}
               onChange={handleSelect}
             >

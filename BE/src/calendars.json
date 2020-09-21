@@ -1,6 +1,10 @@
 {
   "calendars":[
     { "id": 1, "state": "MA", "return": "MA ST-7", "filingType": "Paper", "legalEntity":"Filing Test", "filingFrequency": 1},
-    { "id": 2, "state": "RI", "return": "RI ST-7", "filingType": "Paper", "legalEntity":"Filing Test", "filingFrequency": 2}
+    { "id": 2, "state": "RI", "return": "RI ST-7", "filingType": "Paper", "legalEntity":"Filing Test", "filingFrequency": 2},
+    { "id": 3, "state": "MN", "return": "MN ST-7", "filingType": "Paper", "legalEntity":"Filing Test", "filingFrequency": 1},
+    { "id": 4, "state": "NH", "return": "NH ST-7", "filingType": "Paper", "legalEntity":"Filing Test", "filingFrequency": 2},
+    { "id": 5, "state": "NY", "return": "NY ST-7", "filingType": "Paper", "legalEntity":"Filing Test", "filingFrequency": 1},
+    { "id": 6, "state": "CA", "return": "CA ST-7", "filingType": "Paper", "legalEntity":"Filing Test", "filingFrequency": 2}
   ]
 }
