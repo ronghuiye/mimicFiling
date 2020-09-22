@@ -4,6 +4,15 @@ import Dialog from '@material-ui/core/Dialog';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import Typography from '@material-ui/core/Typography';
 import MuiDialogActions from '@material-ui/core/DialogActions';
+import { withStyles } from '@material-ui/core/styles';
+
+const CustomDialogActions = withStyles((theme) => ({
+  root: {
+    margin: 0,
+    justifyContent: 'center',
+    padding: theme.spacing(1),
+  },
+}))(MuiDialogActions);
 
 export default function ReturnDialog(props) {
 
@@ -16,11 +25,11 @@ export default function ReturnDialog(props) {
             {content}
           </Typography>
         </MuiDialogContent>
-        <MuiDialogActions>
+        <CustomDialogActions >
           <Button autoFocus onClick={handleClose} color="primary">
             OK
           </Button>
-        </MuiDialogActions>
+        </CustomDialogActions>
       </Dialog>
   );
 }

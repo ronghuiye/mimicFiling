@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react"
+import React, {useEffect} from "react"
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -56,9 +56,9 @@ function ReturnList(props) {
     setSelected([])
   }
 
-  const renderYearItems = () => yearItems.map(i => <MenuItem value={i.value}>{i.label}</MenuItem>)
+  const renderYearItems = () => yearItems.map((i, index) => <MenuItem value={i.value} key={`year-item-${index}`}>{i.label}</MenuItem>)
 
-  const renderMonthItems = () => monthItems.map(i => <MenuItem value={i.value}>{i.label}</MenuItem>)
+  const renderMonthItems = () => monthItems.map((i, index) => <MenuItem value={i.value} key={`month-item-${index}`}>{i.label}</MenuItem>)
 
   return (
     <div style={{ height: 600}}>

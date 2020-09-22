@@ -168,7 +168,7 @@ export default function ListView(props) {
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
           count={totalCount}
-          rowsPerPage={rowsPerPage}
+          rowsPerPage={parseInt(rowsPerPage,10)}
           page={parseInt(page,10)}
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}

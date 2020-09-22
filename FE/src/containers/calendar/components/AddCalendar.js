@@ -78,10 +78,10 @@ function AddCalendar(props) {
   }
 
   const isDisabled = () => {
-    return error.state || error.return || error.filingType || error.legalEntity || error.filingFrequency || !newCalendar.state || !newCalendar.return || !newCalendar.filingType || !newCalendar.legalEntity || !newCalendar.filingFrequency
+    return !!(error.state || error.return || error.filingType || error.legalEntity || error.filingFrequency || !newCalendar.state || !newCalendar.return || !newCalendar.filingType || !newCalendar.legalEntity || !newCalendar.filingFrequency)
   }
 
-  const stateMenuItems = () => STATES.map(s =>  <MenuItem value={s.value}>{s.label}</MenuItem>)
+  const stateMenuItems = () => STATES.map((s, index) =>  <MenuItem value={s.value} key={`state-item-${index}`}>{s.label}</MenuItem>)
 
   return (
     <div style={{ height: 600}}>
