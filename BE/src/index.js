@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const calendarList = require('./calendars.json')
 const utils = require('./utils')
+const config = require('../config/default.json')
 
 let globalCalendars = calendarList.calendars
 let ids = 7
@@ -53,27 +54,9 @@ app.get('/api/v1/returns/:year/:month', function (req, res) {
   let includeQuarterlyReturns = month % 3 === 0
   let returns = []
   if (includeQuarterlyReturns) {
-    returns = globalCalendars.map(c => {
-      let obj = {}
-      obj.id = c.id
-      obj.state = c.state
-      obj.return = c.return
-      obj.filingType = c.filingType
-      obj.legalEntity = c.legalEntity
-      obj.amount = month * 1000
-      return obj
-    })
+    returns = utils.getReturnsWithCalendars(globalCalendars)
   } else {
-    returns = globalCalendars.filter(a => a.filingFrequency === 1).map(c => {
-      let obj = {}
-      obj.id = c.id
-      obj.state = c.state
-      obj.return = c.return
-      obj.filingType = c.filingType
-      obj.legalEntity = c.legalEntity
-      obj.amount = month * 1000
-    return obj
-  })
+    returns = utils.getReturnsWithCalendars(globalCalendars.filter(a => a.filingFrequency === 1))
   }
   res.send({
     status: 200,
@@ -81,12 +64,11 @@ app.get('/api/v1/returns/:year/:month', function (req, res) {
     data: returns
   })
 })
-app.get('/api/v1/returns/id', function (req, res) {
-  res.send({
-    status: 200,
-    success: true,
-    data: globalCalendars
-  })
-})
+
 console.log('Starting...')
-app.listen(3001)
+
+app.on('uncaughtException', (err) => {
+  console.error(colors.red(err.stack))
+});
+
+app.listen(config.port)
