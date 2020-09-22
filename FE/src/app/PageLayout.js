@@ -13,7 +13,7 @@ const styles = {
   content: {
     padding: '20px'
   },
-};
+}
 
 const PageLayout = ({children, classes}) => {
 

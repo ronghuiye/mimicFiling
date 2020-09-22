@@ -90,7 +90,7 @@ function AddCalendar(props) {
           <FormControl style={STYLES.formControl}>
             <InputLabel id="state-label">State</InputLabel>
             <Select
-              labelId="dselect-label"
+              labelId="select-label"
               id="state"
               name="state"
               value={newCalendar.state}
@@ -135,7 +135,7 @@ function AddCalendar(props) {
           <FormControl style={STYLES.formControl}>
             <InputLabel id="filingFrequency-label">Filing Frequency</InputLabel>
             <Select
-              labelId="dselect-label"
+              labelId="select-label"
               id="filingFrequency"
               name="filingFrequency"
               value={newCalendar.filingFrequency}

@@ -1,5 +1,5 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import React from 'react'
+import { withStyles } from '@material-ui/core/styles'
 import Navigation from './Navigation'
 
 const styles = {
@@ -7,12 +7,12 @@ const styles = {
     display: 'flex',
     position: 'relative',
     width: ({width}) => width || '100vw',
-  },
-};
+  }
+}
 
 const GlobalLayout = ({children, NavigationProps, classes}) => {
 
-  const renderNavigation = () => <Navigation {...NavigationProps}/>;
+  const renderNavigation = () => <Navigation {...NavigationProps}/>
 
   return (
     <div className="GlobalLayout">
@@ -21,7 +21,7 @@ const GlobalLayout = ({children, NavigationProps, classes}) => {
         {children}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default withStyles(styles)(GlobalLayout);
+export default withStyles(styles)(GlobalLayout)

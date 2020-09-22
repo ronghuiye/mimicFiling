@@ -24,14 +24,13 @@ const useStyles = makeStyles((theme) => ({
     overflowY: 'auto',
     overflowX: 'hidden',
   },
-}));
+}))
 
 const Navigation = ({links}) => {
   const classes = useStyles();
 
-  const renderIcon = icon => {
-    return React.createElement(icon)
-  }
+  const renderIcon = icon => React.createElement(icon)
+
   const renderLinkItem = (link, index) => {
     return (
       <ListItem
@@ -46,20 +45,17 @@ const Navigation = ({links}) => {
     )
   }
 
-  const renderNavigationBar = () => {
-    return (
-      <div className={classes.root}>
-        <div className={classes.content}>
-          <div className={classes.links}>
-            {links.map((link,index) => renderLinkItem(link, index))}
-          </div>
+  return (
+    <div className={classes.root}>
+      <div className={classes.content}>
+        <div className={classes.links}>
+          {links.map((link,index) => renderLinkItem(link, index))}
         </div>
       </div>
-    );
-  };
+    </div>
+  )
 
-  return renderNavigationBar();
-};
+}
 
 
-export default Navigation;
+export default Navigation

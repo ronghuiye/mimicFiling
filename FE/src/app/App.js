@@ -3,11 +3,10 @@ import './App.css';
 import {Route, Switch, withRouter, Redirect} from 'react-router-dom'
 import routes from './routes'
 import { Settings, List } from '@material-ui/icons';
-
-import GlobalLayout from './components/GlobalLayout'
-import CalendarList from './containers/calendar/calendarContainer'
-import PageLayout from './components/PageLayout'
-import ReturnList from './containers/return/returnContainer'
+import GlobalLayout from './GlobalLayout'
+import CalendarList from '../containers/calendar/calendarContainer'
+import PageLayout from './PageLayout'
+import ReturnList from '../containers/return/returnContainer'
 
 class App extends React.Component {
 

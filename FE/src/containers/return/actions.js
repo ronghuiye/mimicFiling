@@ -7,7 +7,7 @@ export const setMonth = data =>({type: actionTypes.SET_MONTH, data})
 export const setSelected = data =>({type: actionTypes.SET_SELECTED, data})
 
 export const fetchReturnList = (year, month) => {
-  let errorText = 'Failed to get calendar list'
+  let errorText = 'Failed to get return list'
   return dispatch => {
     ManagerReturnrAPI.fetchReturnList(year, month).then((response) => {
       if (response && response.success) {

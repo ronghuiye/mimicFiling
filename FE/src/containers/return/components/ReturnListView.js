@@ -8,8 +8,8 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
-import EnhancedTableHead from '../../../components/EnhancedTableHead'
-import EnhancedTableToolbar from '../../../components/EnhancedTableToolbar'
+import EnhancedTableHead from '../../../sharedComponents/EnhancedTableHead'
+import EnhancedTableToolbar from '../../../sharedComponents/EnhancedTableToolbar'
 import ReturnDialog from './ReturnDialog'
 
 function descendingComparator(a, b, orderBy) {
