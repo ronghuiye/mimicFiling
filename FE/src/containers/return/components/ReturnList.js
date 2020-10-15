@@ -43,9 +43,7 @@ function ReturnList(props) {
 
   const {fetchReturnList, year, month, setYear, setMonth, returnList, selected, setSelected} = props
 
-  useEffect(() => {
-    fetchReturnList(year,month)
-  }, [year,month])
+  useEffect(() => fetchReturnList(year,month), [fetchReturnList,year,month])
 
   const handleOnChange = event => {
     const {value, name} = event.target

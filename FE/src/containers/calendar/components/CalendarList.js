@@ -16,9 +16,11 @@ function CalendarList(props) {
 
   const [isOpen, setOpen] = useState(false)
 
+  const {fetchCalendarList, pageState, calendarList, setPageState, deleteCalendar, createCalendar} = props
+
   useEffect(() => {
-    props.fetchCalendarList(props.pageState)
-  },[props.pageState.order, props.pageState.rowsPerPage, props.pageState.orderBy, props.pageState.page])
+    fetchCalendarList(pageState)
+  },[fetchCalendarList, pageState.order, pageState.rowsPerPage, pageState.orderBy, pageState.page])
 
   const handleOnClick = () => {
     setOpen(true)
@@ -30,8 +32,8 @@ function CalendarList(props) {
 
   return (
     <div style={{ height: 600, width: 'auto' }}>
-      <ListView rows={props.calendarList} headCells={headCells} pageState={props.pageState} setPageState={props.setPageState} addOnClick={handleOnClick} deleteOnClick={props.deleteCalendar} />
-      <AddCalendar open={isOpen} onClose={handleOnClose} createCalendar={props.createCalendar} />
+      <ListView rows={calendarList} headCells={headCells} pageState={pageState} setPageState={setPageState} addOnClick={handleOnClick} deleteOnClick={deleteCalendar} />
+      <AddCalendar open={isOpen} onClose={handleOnClose} createCalendar={createCalendar} />
     </div>
   )
 
